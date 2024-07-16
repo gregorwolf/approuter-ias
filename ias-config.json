@@ -1,0 +1,24 @@
+{
+  "name": "Demo-App",
+  "oauth2-configuration": {
+    "redirect-uris": ["https://*.cfapps.eu20.hana.ondemand.com/**"],
+    "public-client": false,
+    "grant-types": [
+      "authorization_code",
+      "urn:ietf:params:oauth:grant-type:jwt-bearer"
+    ],
+    "token-policy": {
+      "token-validity": 1800,
+      "refresh-validity": 7776000,
+      "refresh-parallel": 3,
+      "refresh-usage-after-renewal": "off"
+    }
+  },
+  "consumed-services": [],
+  "xsuaa-cross-consumption": true,
+  "display-name": "Demo App",
+  "subject-name-identifier": {
+    "attribute": "userUuid",
+    "fallback-attribute": "uid"
+  }
+}

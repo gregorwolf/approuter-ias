@@ -1,0 +1,14 @@
+{
+  "name": "approuter-ias",
+  "version": "1.0.0",
+  "description": "approuter with IAS authentication",
+  "repository": "",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "router:hybrid": "cds bind --exec --profile hybrid npm run router:run",
+    "router:run": "(cd router && node node_modules/@sap/approuter/approuter.js)"
+  }
+}

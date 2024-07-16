@@ -1,0 +1,68 @@
+---
+_schema-version: '3.1'
+ID: demoApp
+version: 1.0.0
+description: "A simple AppGyver App."
+parameters:
+  enable-parallel-deployments: true
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        - npm ci
+modules:
+  - name: demoApp-router
+    type: approuter.nodejs
+    path: router
+    build-parameters:
+      builder: npm-ci
+      ignore: ["node_modules/"]
+    properties:
+      IAS_PKCE_XCHANGE_ENABLED: true
+    parameters:
+      memory: 128MB
+      disk-quota: 256MB
+    requires:
+      - name: demoApp-destination-service
+      - name: demoApp-connectivity-service
+      - name: demoApp-uaa
+      - name: demoApp-ias
+        parameters:
+          config: 
+             credential-type: X509_GENERATED
+    provides:
+      - name: router-api
+        properties:
+           srv-url: ${default-url}
+resources:
+  - name: demoApp-uaa
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./xs-security.json
+      config:
+        xsappname: demoApp-${org}-${space}
+      service-keys:  
+        - name: default
+  - name: demoApp-ias
+    type: org.cloudfoundry.managed-service
+    requires:
+      - name: router-api
+    parameters:
+      service: identity
+      service-plan: application
+      path: ./ias-config.json
+      config:
+        display-name: Demo App (${org} ${space})
+        name: Demo-App-${org}-${space}
+  - name: demoApp-destination-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service-plan: lite
+      service: destination
+  - name: demoApp-connectivity-service
+    parameters:
+      service-plan: lite
+      service: connectivity
+    type: org.cloudfoundry.managed-service

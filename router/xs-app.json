@@ -1,0 +1,24 @@
+{
+  "welcomeFile": "/",
+  "authenticationMethod": "route",
+  "logout": {
+    "logoutEndpoint": "/do/logout"
+  },
+  "routes": [
+    {
+      "source": "^/destination/([^/]+)/(.*)$",
+      "target": "$2",
+      "destination": "$1"
+    },
+    {
+      "source": "^/sap/(.*)$",
+      "target": "/sap/$1",
+      "destination": "SAP_ABAP_BACKEND"
+    },
+    {
+      "source": "^/user-api(.*)",
+      "target": "$1",
+      "service": "sap-approuter-userapi"
+    }
+  ]
+}
