@@ -52,6 +52,8 @@ resources:
     parameters:
       service: identity
       service-plan: application
+      # Documentation for the IAS configuration file can be found here:
+      # https://help.sap.com/docs/cloud-identity-services/cloud-identity-services/reference-information-for-identity-service-of-sap-btp?locale=en-US
       path: ./ias-config.json
       config:
         display-name: Demo App (${org} ${space})
