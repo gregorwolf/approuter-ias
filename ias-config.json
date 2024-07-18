@@ -14,7 +14,11 @@
       "refresh-usage-after-renewal": "off"
     }
   },
-  "consumed-services": [],
+  "consumed-services": [
+    {
+      "service-instance-name": "demoApp-destination-service"
+    }
+  ],
   "xsuaa-cross-consumption": true,
   "display-name": "Demo App",
   "subject-name-identifier": {
