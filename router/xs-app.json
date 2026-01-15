@@ -2,7 +2,8 @@
   "welcomeFile": "/",
   "authenticationMethod": "route",
   "logout": {
-    "logoutEndpoint": "/do/logout"
+    "logoutEndpoint": "/do/logout",
+    "backChannelLogoutEndpoint": "/back-channel-logout"
   },
   "routes": [
     {

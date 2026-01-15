@@ -1,5 +1,5 @@
 ---
-_schema-version: '3.1'
+_schema-version: "3.1"
 ID: demoApp
 version: 1.0.0
 description: "A simple AppGyver App."
@@ -28,12 +28,12 @@ modules:
       - name: demoApp-uaa
       - name: demoApp-ias
         parameters:
-          config: 
-             credential-type: X509_GENERATED
+          config:
+            credential-type: X509_GENERATED
     provides:
       - name: router-api
         properties:
-           srv-url: ${default-url}
+          srv-url: ${default-url}
 resources:
   - name: demoApp-uaa
     type: org.cloudfoundry.managed-service
@@ -43,7 +43,7 @@ resources:
       path: ./xs-security.json
       config:
         xsappname: demoApp-${org}-${space}
-      service-keys:  
+      service-keys:
         - name: default
   - name: demoApp-ias
     type: org.cloudfoundry.managed-service
@@ -54,10 +54,15 @@ resources:
       service-plan: application
       # Documentation for the IAS configuration file can be found here:
       # https://help.sap.com/docs/cloud-identity-services/cloud-identity-services/reference-information-for-identity-service-of-sap-btp?locale=en-US
+      # API Documentation:
+      # https://api.sap.com/api/SCI_Application_Directory/overview
       path: ./ias-config.json
       config:
         display-name: Demo App (${org} ${space})
         name: Demo-App-${org}-${space}
+        oauth2-configuration:
+          back-channel-logout-uris:
+            - "~{router-api/srv-url}/back-channel-logout"
   - name: demoApp-destination-service
     type: org.cloudfoundry.managed-service
     parameters:
