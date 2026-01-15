@@ -5,10 +5,16 @@
   "repository": "",
   "license": "UNLICENSED",
   "private": true,
+  "engines": {
+    "node": "^22"
+  },
   "dependencies": {},
   "devDependencies": {},
   "scripts": {
     "router:hybrid": "cds bind --exec --profile hybrid npm run router:run",
     "router:run": "(cd router && node node_modules/@sap/approuter/approuter.js)"
-  }
+  },
+  "workspaces": [
+    "router"
+  ]
 }
