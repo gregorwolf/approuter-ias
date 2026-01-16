@@ -21,8 +21,9 @@ modules:
       IAS_PKCE_XCHANGE_ENABLED: true
     parameters:
       memory: 128MB
-      disk-quota: 256MB
+      disk-quota: 2GB
     requires:
+      - name: demoApp-logging
       - name: demoApp-destination-service
       - name: demoApp-connectivity-service
       - name: demoApp-uaa
@@ -43,6 +44,11 @@ resources:
       path: ./xs-security.json
       config:
         xsappname: demoApp-${org}-${space}
+        role-collections:
+          - name: "Demo App ${space}"
+            description: "Demo App ${space}"
+            role-template-references:
+              - "$XSAPPNAME.Token_Exchange"
       service-keys:
         - name: default
   - name: demoApp-ias
@@ -63,6 +69,9 @@ resources:
         oauth2-configuration:
           back-channel-logout-uris:
             - "~{router-api/srv-url}/back-channel-logout"
+            - "https://cswtest.free.beeceptor.com/back-channel-logout/${org}/${space}"
+          post-logout-redirect-uris:
+            - "~{router-api/srv-url}/logout/"
   - name: demoApp-destination-service
     type: org.cloudfoundry.managed-service
     parameters:
@@ -73,3 +82,8 @@ resources:
       service-plan: lite
       service: connectivity
     type: org.cloudfoundry.managed-service
+  - name: demoApp-logging
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: application-logs
+      service-plan: lite
