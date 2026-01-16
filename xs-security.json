@@ -12,14 +12,9 @@
     {
       "name": "Token_Exchange",
       "description": "UAA Token Exchange",
-      "scope-references": ["uaa.user"]
-    }
-  ],
-  "role-collections": [
-    {
-      "name": "Demo App",
-      "description": "Demo App",
-      "role-template-references": ["$XSAPPNAME.Token_Exchange"]
+      "scope-references": [
+        "uaa.user"
+      ]
     }
   ],
   "oauth2-configuration": {
