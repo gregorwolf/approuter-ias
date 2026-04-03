@@ -1,10 +1,10 @@
 {
   "name": "demoApp-router",
   "dependencies": {
-    "@sap/approuter": "^20.8.8",
-    "@sap/xsenv": "^6.0.0",
-    "@sap/xssec": "^4.12.1",
-    "axios": "^1.13.2",
+    "@sap/approuter": "^21.2.0",
+    "@sap/xsenv": "^6.1.0",
+    "@sap/xssec": "^4.13.0",
+    "axios": "^1.14.0",
     "passport": "^0.7.0",
     "jwt-decode": "^4.0.0",
     "node-cache": "^5.1.2"
